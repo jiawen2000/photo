@@ -445,10 +445,10 @@
 
         @media (max-width: 768px) {
             .scroll-indicator {
-                left: auto;
-                right: 50px;
-                bottom: 20px;
-                transform: none;
+                position: absolute;
+                left: 50%;
+                bottom: 80px; /* 根據需要調整：越大越上方 */
+                transform: translateX(-50%);
             }
             }
 
