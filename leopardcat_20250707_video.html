@@ -581,13 +581,73 @@
         </div>
     </div>
 
-    <div style="height: 115vh; position: relative; overflow: hidden;">
-   
-    <video id="video1" controls playsinline preload="auto" width="100%">
-    <source src="https://jiawen2000.github.io/photo/video1.mp4" type="video/mp4" />
+<style>
+  .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .custom-play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-play-button::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 20px solid white;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+  }
+
+  .custom-play-button.hidden {
+    display: none;
+  }
+</style>
+
+<div class="video-container">
+  <video id="video1" preload="auto" playsinline>
+    <source src="https://jiawen2000.github.io/photo/video1.mp4" type="video/mp4">
     您的瀏覽器不支援 HTML5 影片。
-    </video>
-    </div>
+  </video>
+  <div class="custom-play-button" id="playButton"></div>
+</div>
+
+<script>
+  const video = document.getElementById('video1');
+  const playButton = document.getElementById('playButton');
+
+  playButton.addEventListener('click', () => {
+    video.play();
+    playButton.classList.add('hidden');
+  });
+
+  video.addEventListener('pause', () => {
+    playButton.classList.remove('hidden');
+  });
+</script>
+
 
 
 
