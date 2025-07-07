@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>石虎野放訓練再升級 山林中仍被消音的獵場</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Serif TC', serif;
+            letter-spacing: 0.05em;
+        }
+
+        .progress-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            background-color: #f1f1f1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #889187;
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        .banner {
+            position: relative;
+            height: 100vh;
+            background-color: #889187;
+            overflow: hidden;
+        }
+
+        .banner-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://jiawen2000.github.io/photo/cover2.jpg");
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            z-index: 20;
+            cursor: pointer;
+        }
+
+        .scroll-arrow {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .content p {
+            margin-bottom: 40px;
+            margin-top: 10px;
+        }
+
+        .inline-image {
+            display: block;
+            margin: 10px auto;
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+
+        .inline-image-2 {
+            display: block;
+            background-size: cover;
+            width: 100%;
+            height: auto;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://jiawen2000.github.io/photo/DSC_0797.JPG.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .box {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .box p {
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .spacer {
+            height: 40vh;
+        }
+
+        .section {
+            font-size: 1.2rem;
+            line-height: 2;
+        }
+
+        .new-section {
+            position: relative;
+            min-height: 300vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .section-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+            font-size: 1.2rem;
+            line-height: 2;
+        }
+
+        .note {
+            padding: 0;
+            margin-top: 40px;
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .sticky-background {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            z-index: -1;
+            background-size: cover;
+            background-image: url('https://jiawen2000.github.io/photo/DSC_0797.JPG.jpg');
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .image-row img {
+            width: 48%;
+            height: auto;
+        }
+
+        .video-section {
+            height: 100vh;
+        }
+
+        .sticky-video {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            z-index: 10;
+        }
+
+        .footer {
+            text-align: left;
+            font-size: 0.8rem;
+            line-height: 1;
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 36rem;
+            margin: 0 auto;
+        }
+
+        .carousel-button {
+            padding: 0.5rem;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            z-index: 10;
+        }
+
+        .carousel-button:hover {
+            background-color: #d1d5db;
+        }
+
+        .prev-button {
+            margin-right: 1rem;
+        }
+
+        .next-button {
+            margin-left: 1rem;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        /* 響應式設計 - 平板設備 */
+        @media screen and (max-width: 768px) {
+            .content {
+                max-width: 90%;
+                padding: 15px;
+            }
+
+            .section {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+
+            .section-content {
+                width: 90%;
+                padding: 15px;
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+
+            .inline-image {
+                margin: 20px auto;
+            }
+
+            .note {
+                font-size: 0.85rem;
+                line-height: 1.6;
+            }
+
+            .footer {
+                font-size: 0.75rem;
+                padding: 15px;
+            }
+
+            .image-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .image-row img {
+                width: 100%;
+            }
+        }
+
+        /* 響應式設計 - 手機設備 */
+        @media screen and (max-width: 480px) {
+            .content {
+                max-width: 95%;
+                padding: 10px;
+            }
+
+            .content p {
+                margin-bottom: 30px;
+                margin-top: 8px;
+            }
+
+            .section {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+
+            .section-content {
+                width: 95%;
+                padding: 12px;
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .box p {
+                padding: 15px;
+                font-size: 0.95rem;
+            }
+
+            .note {
+                font-size: 0.8rem;
+                line-height: 1.5;
+                margin-top: 30px;
+            }
+
+            .footer {
+                font-size: 0.7rem;
+                padding: 10px;
+            }
+
+            .scroll-indicator {
+                bottom: 60px;
+                font-size: 0.9rem;
+            }
+
+            .new-section {
+                min-height: 200vh;
+            }
+
+            .carousel-container {
+                max-width: 100%;
+            }
+
+            .image-container {
+                height: 200px;
+            }
+
+            .carousel-button {
+                padding: 0.3rem;
+            }
+
+            .prev-button {
+                margin-right: 0.5rem;
+            }
+
+            .next-button {
+                margin-left: 0.5rem;
+            }
+        }
+
+        /* 超小型手機設備 */
+        @media screen and (max-width: 360px) {
+            .content {
+                padding: 8px;
+            }
+
+            .section {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .section h3 {
+                font-size: 1.1rem;
+            }
+
+            .section-content {
+                padding: 10px;
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .box p {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+
+            .note {
+                font-size: 0.75rem;
+                line-height: 1.4;
+            }
+
+            .footer {
+                font-size: 0.65rem;
+                padding: 8px;
+            }
+
+            .image-container {
+                height: 150px;
+            }
+        }
+
+        /* 確保視頻在所有設備上都能正常顯示 */
+        video {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+        }
+
+        /* 確保所有圖片都是響應式的 */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* 針對觸控設備優化點擊區域 */
+        @media (pointer: coarse) {
+            .scroll-indicator {
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            .carousel-button {
+                padding: 0.8rem;
+                min-width: 44px;
+                min-height: 44px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="scroll-line" id="scrollLine"></div>
+
+    <div class="banner">
+        <div class="banner-image"></div>
+        <div class="scroll-indicator" onclick="scrollToContent()">
+            <div class="scroll-arrow">｜</div>
+            <div>Scroll</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <p>未曾察覺的山腳下，生與死的角力正無聲地上演，政治的口水戰無形中左右著這片山林的命運。</p>
+            <p>2017年2月「零安樂死政策」上路之前，野生動物保護團體就曾警告過政策若倉皇實施，流浪動物收容中心的量能將不足，不僅侵犯伴侶動物生存的福祉，苗栗、臺中及南投淺山地區未來恐怕面臨暗潮湧動的生態危機——遊蕩犬隻增加，跨物種間會發生食物競爭、騷擾獵殺與棲地競爭等情況，而犬群因習性與體型的優勢，一步步壓縮石虎的棲息地。此外，人為導致的餵食熱區更促使大量犬隻群聚，對石虎保育來說無疑是雪上加霜，成為犬隻的獵場、石虎的墓地。
+            </p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <h3>隱性的犬殺危機：通報數據與實地追蹤間的差距</h3>
+            <p>根據農業部生物多樣性研究所（以下簡稱「生多所」）2019年至2024年的野外追蹤救傷案例顯示，31例中有7隻死於犬攻擊，2隻疑似因犬攻擊死亡，且凡是經過犬隻攻擊，死亡率高達100%；而同期僅記錄到2例路殺事件。
+            </p>
+        </div>
+    </div>
+
+            <img src="https://jiawen2000.github.io/photo/1.png" alt="圖表一" class="inline-image">
+            
+    <div class="content">
+        <div class="section">
+            <p>相較之下，2023年由民眾或相關單位通報的72例石虎救傷案例中，車輛撞擊占42例，犬殺及疑似犬殺僅6例，路殺比例遠高於犬殺。
+            </p>
+        </div>
+    </div>
+            <img src="https://jiawen2000.github.io/photo/2.png" alt="圖表二" class="inline-image">
+            
+    <div class="content">
+        <div class="section"> 
+            <p>台灣石虎保育協會秘書長陳美汀表示，路殺案例較容易被發現和通報，因為動物屍體通常會出現在路邊；相比之下，犬殺案例多發生在山區，屍體不易被發現。因此，「通報數據低估了犬殺的真實威脅。」</p>
+            <p>而台灣石虎保育協會的追蹤結果也與生多所類似。2019年至2021年間於卓蘭地區追蹤的8隻石虎中，1隻死於路殺，2隻死於犬殺；2021年至2023年於大安溪中游追蹤的8隻個體中，情況類似，1隻遭路殺，2隻遭犬殺，其中一例犬殺更是發生於石虎被獸夾傷害後，無法逃脫犬群攻擊。
+            </p>
+        </div>
+    </div>
+
+    <div class="image-row">
+        <img src="https://jiawen2000.github.io/photo/3.png" alt="圖表三" class="inline-image">
+        <img src="https://jiawen2000.github.io/photo/4.png" alt="圖表四" class="inline-image">
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <p>所有被追蹤的石虎均為救傷後通過完整野放評估程序的個體，並配戴無線電發報器進行追蹤，雖然樣本數不算很大，但這些個體死亡時，研究或救援單位能夠透過發報器找到屍體並判斷死因，減少了取樣偏差。陳美汀認為結果具有相當的可信度，比單純統計通報數據更為精確。
+            </p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <h3>生態保育工作犬介入 讓犬隻解決犬隻問題</h3>
+            <p>隨著犬殺問題對石虎族群的威脅日益加劇，生多所自2022年底起與台灣偵搜犬協會合作，全面升級石虎野放前的犬趨避訓練。</p>
+            <p>石虎野放前的訓練包含活體食物捕抓技巧訓練、雞舍電圍網制約訓練、棲架攀爬練習、人趨避訓練與犬趨避訓練等，其中，犬趨避訓練是指每一隻石虎在野放前，犬訓練師會透過指令，遠距離控制生態保育工作犬群，以強化石虎對犬隻的趨避反應，進而提高石虎對犬隻的警覺性及逃生能力，藉以提高野放後的存活機率。截至目前，已有約30隻石虎完成這一訓練。
+            </p>
+        </div>
+    </div>
+    <img src="https://jiawen2000.github.io/photo/1-9.jpg" alt="圖一" class="inline-image-2">
+
+    <div class="content">
+        <div class="note">
+            <p>台灣偵搜犬協會領犬員周聰吉於石虎野放訓練籠舍內，進行犬趨避訓練。（照片來源：農業部生物多樣性研究所）
+            </p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <p>台灣偵搜犬協會領犬員周聰吉表示，犬趨避還分成聽覺、視覺以及嗅覺，而訓練過程必須強化犬隻叫聲、抓爬、氣味的趨避，意指「當石虎聽到、看到或是聞到類似犬隻的跡象時，都要啟動逃離機制。」此為2.0版本的犬趨避訓練，1.0版則是使用未經訓練家犬訓練，即「牽繩帶狗進到籠內朝石虎威嚇」。
+            </p>
+            <p>這項合作的契機源於一隻名為「壽司」的石虎犬殺案件。台灣偵搜犬協會當時協助調查，利用搜救犬的搜索能力，在溪邊發現了與案件相關的跡證，確認「壽司」遭犬隻獵殺。此後，搜救犬的追蹤能力與「可控制」的特性引起生多所的注意，雙方開始合作，讓搜救犬參與石虎的野放訓練，專注於犬趨避技能的培養。
+            </p>
+            <p>然而，搜救犬並非生態保育工作犬，野生動物的犬趨避訓練工作應屬於生態保育工作犬範疇，但台灣目前並沒有專責進行石虎犬趨避訓練的生態保育工作犬。周聰吉坦承，搜救犬之所以能夠暫時作為生態保育工作犬，僅因為搜救犬是高功能犬，具有放棄纏鬥、遠距離控制、哨聲控制等高技術能力。
+            </p>
+        </div>
+    </div>
+
+    <div style="height: 115vh;">
+        <video id="video1" width="100%" height="auto" preload="auto" object-fit: cover>
+            <source src="https://jiawen2000.github.io/photo/video1.mp4" type="video/mp4">
+            您的瀏覽器不支援 HTML5 視頻。
+        </video>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById('video1'); // 獲取影片元素
+
+            window.addEventListener('scroll', function () {
+                const rect = video.getBoundingClientRect(); // 取得影片的邊界資訊
+
+                // 檢查影片是否進入視口
+                if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+                    // 如果影片進入視口並且影片沒有播放，則開始播放影片
+                    if (video.paused) {
+                        video.play();
+                    }
+                } else {
+                    // 如果影片離開視口，停止播放影片
+                    if (!video.paused) {
+                        video.pause();
+                        video.currentTime = 0; // 重置影片進度，從頭開始
+                    }
+                }
+            });
+        });
+
+    </script>
+
+    <div class="content">
+        <div class="note">
+            <p>石虎梅香（上方）的首次犬趨避訓練。當多隻生態保育工作犬吠叫時，梅香對犬隻做出「哈氣」反應。（照片來源：台灣偵搜犬協會）
+            </p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <p>周聰吉提及，雖然搜救犬與生態保育工作犬有七成的訓練是共同的項目，其餘三成仍需要加訓，「加訓的項目包含鑽洞技能、特定氣味追蹤、垂直跳躍、網狀地形適應等。」由於訓練時間涉及訓練技術的差異，因此難以評估需要多長的時間進行加訓。此外，搜救犬為高階訓練犬，每隻訓練開支百萬以上，需花費三年以上進行完整的訓練，周聰吉表示，「本會純粹是為這塊土地上野生動物盡一份心力，完全沒有收費，假使有一天能力不足，也就無法進行下去。」
+            </p>
+        </div>
+    </div>
+
+
+    <!-- <div style="height: 115vh;">
+        <div class="video-section">
+            <video id="video2" class="sticky-video" width="100%" height="auto" preload="auto">
+                <source src="https://jiawen2000.github.io/photo/video_r.mp4" type="video/mp4">
+                您的瀏覽器不支援 HTML5 視頻。
+            </video>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video2');
+        video.addEventListener('canplaythrough', () => {
+            console.log("影片已完全緩存，適合播放");
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById('video2'); // 獲取影片元素
+            let isScrolling = false; // 判斷是否正在滾動
+            let scrollTimeout; // 定時器，檢測滾動停止
+            let playbackSpeed = 1; // 默認播放速度
+
+            // 處理影片倒退播放
+            function playReverse() {
+                if (!video.paused) {
+                    video.currentTime -= 0.03; // 每幀倒退播放
+                    if (video.currentTime <= 0) {
+                        video.pause(); // 到開頭停止
+                    } else {
+                        requestAnimationFrame(playReverse); // 持續倒退
+                    }
+                }
+            }
+
+            // 監聽滑鼠滾動事件
+            window.addEventListener('wheel', function (event) {
+                // 清除上次的滾動停止定時器
+                clearTimeout(scrollTimeout);
+
+                // 向下滾動：正向播放
+                if (event.deltaY > 0) {
+                    if (video.paused || playbackSpeed < 0) {
+                        video.play();
+                    }
+                    playbackSpeed = Math.min(3, playbackSpeed + 0.1); // 限制播放速度最大為3倍
+                    video.playbackRate = playbackSpeed;
+                }
+                // 向上滾動：倒退播放
+                else if (event.deltaY < 0) {
+                    if (!video.paused || playbackSpeed > 0) {
+                        video.pause(); // 暫停正向播放
+                    }
+                    playbackSpeed = Math.max(-3, playbackSpeed - 0.1); // 限制倒退速度最大為-3倍
+                    video.playbackRate = Math.abs(playbackSpeed); // 設置正值速度
+                    if (video.paused) {
+                        playReverse(); // 啟動倒退播放
+                    }
+                }
+
+                // 設置滾動停止後的暫停處理
+                scrollTimeout = setTimeout(function () {
+                    video.pause(); // 滾動停止時暫停影片
+                    playbackSpeed = 1; // 重置播放速度
+                }, 100); // 停止滾動後延遲100ms
+            });
+        });
+
+
+    </script>
+
+    <div class="content">
+        <div class="note">
+            <p>搜救犬與生態保育工作犬共同的訓練項目。（林佳玟／攝影）
+            </p>
+        </div>
+    </div> -->
+
+    <div class="content">
+        <div class="section">
+            <h3>犬群追逐的現實 揭示犬趨避訓練的極限</h3>
+            <p>研究石虎保育二十餘年的陳美汀坦認，實務上難以評估犬趨避訓練的效果，研究人員僅能通過觀察石虎行為來判斷牠們是否習得應對犬隻的技巧。出於安全考量，訓練過程中並不會「真正的」面臨危險，僅是讓犬隻進入圈養區，製造緊張與威脅感，但石虎始終有安全的躲避場所。
+            </p>
+            <p>據陳美汀的了解，過去獵人以犬隻捕捉石虎時，會放出多隻狗追逐石虎，石虎通常在無路可逃時選擇爬上樹躲避。然而，獵人會用工具戳樹上的石虎，迫使牠掉落地面。此時，狗會再次進行追逐。這樣的追捕過程反覆進行，直到石虎因體力耗盡無法再逃，被狗咬住。陳美汀臉色一沉，「這是一種極為殘忍的捕獵方式，但必須得說，在野外環境中，類似的情況也可能發生。」
+            </p>
+            <p>當犬隻追逐石虎時，石虎往往會爬上樹避險。如果是體型較大或耐心足夠的犬隻，可能會長時間守在樹下，等待石虎下來。對於成年且經驗豐富的石虎來說，牠們可能也相對有能力長時間待在樹上以消耗追逐者的耐性。然而，對於年幼或懷孕中的石虎來說，牠們的體力往往不足以長時間堅持，這使得牠們更容易成為犬隻爪下的受害者，生存的風險也因此大幅提高。
+            </p>
+        </div>
+    </div>
+            <img src="https://jiawen2000.github.io/photo/jpeg.jpeg" alt="圖一" class="inline-image-2">
+
+            <div class="content">
+                <div class="note">
+                    <p>配戴發報器的石虎。（照片來源：台灣石虎保育協會）
+                    </p>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="section">
+            <p>陳美汀指出，犬隻對石虎的威脅是一個相對較新的問題，石虎尚未有足夠的時間來適應這種威脅。她進一步解釋，從演化學的觀點來看，台灣石虎在應對陡峭地形的方面可能具有一定優勢，這與台灣原生的地理環境有關，是經過長期演化形成的能力。然而，犬隻問題是近年來才逐漸惡化的現象，並非石虎過去面臨的自然威脅。陳美汀強調：「一個自然存在的問題，我們可能會選擇讓自然規律來解決。但犬隻威脅是人為造成，因此我們必須積極採取措施，而不能寄望於石虎通過漫長的演化過程來適應。」
+            </p>
+            <p>周聰吉也了解犬隻趨避的侷限，此訓練實為落入「不得不為之、不能不為之」的處境，根據最新的研究，石虎估計數量為468至669隻，因此每少一隻，都是極為嚴重的事情。周聰吉認為，「最佳方法不是犬趨避訓練，解決共域問題、處理安置浪犬才是最佳辦法。」
+            </p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <h3>石虎熱區的遊蕩犬管理計畫實施</h3>
+            <p>為改善遊蕩犬隻對野生動物棲息環境的侵擾，最根本的解決辦法應是回到源頭控制。控制流浪犬數量的其中一個方式為進行TNR（Trap-Neuter-Return），也就是誘捕、絕育、放回。</p>
+            <p>根據農業部的資料顯示，TNR是藉由專業人員設置陷阱捕捉流浪犬貓，隨後送至動物醫療機構進行結紮，並以剪耳作為識別標誌。待傷口癒合後，將牠們放回原地，藉此利用牠們的地域性來驅逐外來流浪動物，從而讓當地流浪犬貓的數量達到自然穩定。此為零撲殺政策上路後，因應收容量能不足所採取的過渡性措施。
+            </p>
+            <p>農業部動物保護司司長江文全提及，TNR的成功需建立在三個基礎之上，「第一，在相對封閉的區域實施；第二，絕育率必須要有八成；第三，居民要有共識。三者缺一不可。」有鑒於石虎棲息地為開放的淺山地區，TNR實則難以有成效，且若依照原本的做法，將遊蕩犬回放，也難以避免犬殺問題。
+            </p>
+        </div>
+    </div>
+
+    <div style="height:900vh;">
+        <div class="sticky-background"></div>
+
+        <div class="new-section">
+            <div class="section-content">
+                <p>在野保團體的敦促之下，農業部於2023年起，在苗栗縣、南投縣及臺中市的石虎主要棲息區域試辦「特定臺灣原生種野生動物受遊蕩犬侵擾改善計畫」（以下簡稱「計畫」）。</p>
+                <div class="note">
+                    <p>註：圖為2024年「為野生動物而走大遊行」現場，民眾及野保團體積極爭取野生動物的生存權利，而「避免餵食」與「犬貓安居」皆列為主要訴求。（林佳玟／攝影）</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="new-section">
+            <div class="section-content">
+                <p>針對家犬，計畫全面清查放養犬隻，要求完成絕育並進行寵物登記，強化家戶管理。同時，推動社區溝通與飼主教育，落實正確飼養方式。不願絕育的飼主須依法申報，違反規定者將依《動物保護法》查處。</p>
+            </div>
+        </div>
+
+        <div class="new-section">
+            <div class="section-content">
+                <p>針對無主犬隻，建立在地合作團隊，協調餵養者配合捕捉與絕育，並以不回置為原則，將犬隻移置至安置場域。計畫後期，逐步清除生態敏感地區的餵食點，同時疏導餵養者停止餵養或轉移至其他地點，避免犬群再度移入。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 音檔 -->
+    <audio id="audio1" src="https://jiawen2000.github.io/photo/audio1.mp3" preload="auto"></audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById('audio1'); // 獲取音檔元素
+            const stickyBackground = document.querySelector('.sticky-background'); // 獲取 .sticky-background 元素
+
+            window.addEventListener('scroll', function () {
+                const rect = stickyBackground.getBoundingClientRect();
+
+                // 檢查 .sticky-background 是否進入視窗
+                if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+                    // 如果元素進入視窗且音檔未播放，則開始播放音檔
+                    if (audio.paused) {
+                        audio.play();
+                    }
+                } else {
+                    // 如果元素完全離開視窗，停止播放音檔
+                    if (!audio.paused) {
+                        audio.pause();
+                        audio.currentTime = 0; // 重置音檔到開始
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function scrollToContent() {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('scroll', function () {
+            const scrollLine = document.getElementById('scrollLine');
+            const progressBar = document.getElementById('progressBar');
+            const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollProgress = (window.scrollY / scrollTotal) * 100;
+
+            scrollLine.style.width = `${scrollProgress}%`;
+            progressBar.style.width = `${scrollProgress}%`;
+        });
+    </script>
+
+    <div class="content">
+        <div class="section">
+            <p>在家犬方面，江文全表示計畫執行的具體作為包含說明會與挨家挨戶的宣導。針對後者，目前主要是透過村里系統，多次訪視區域內的民眾，強化犬隻絕育以及不隨意棄養的觀念，這也有助於提高民眾接受後續提供的絕育服務。</p>
+            <p>苗栗縣卓蘭鎮苗豐里及通霄鎮白西里均被納入管理範圍。居住在苗豐里二十餘年的巫先生，以及在白西里生活超過三十年的駱小姐均表示，由於家中飼養犬隻，去年分別接受了鎮公所、獸醫或苗栗縣動物保護防疫所人員的拜訪，宣導犬隻結紮、晶片植入、狂犬病疫苗接種及正確飼養觀念。兩位居民均表示支持犬隻絕育措施，並認同相關政策。駱小姐提及，「他們（政府人員）會來家裡把狗載走，結紮後再載回來，非常方便，而且完全免費。」
+            </p>
+            <p>然而，苗豐里里長陳正成坦言，已植入晶片的寵物過世後應依法辦理註銷登記，但部分居民因嫌手續繁瑣而拒絕晶片植入，這也為後續管理帶來困難。</p>
+            <p>而在餵食層面上，陳美汀表示，「這是動保團體和野保團體之間最大的分歧。」動物保護團體與野生動物保護團體基於流浪動物或野生動物的生存權利，各自站穩餵食與反餵食的立場，因此短期內要全面禁餵並不實際，而從生態熱點著手會是相對可行的辦法。而就現行法規，特定的餵食地點將對應到相關的罰則。例如，在國家公園內，是依據《國家公園法》，若在野生動物保護區，則按照《野生動物保育法》。如果上述法規皆不適用，但餵養行為影響到環境衛生，將轉以《廢棄物清理法》處理。
+            </p>
+            <p>「老實說，我們很清楚餵養者看到執法人員就會躲避。」江文全強調，當某個地區的野化、放養或是流浪動物密度增高時，環境、疾病傳播，以及動物福利等問題將會加劇、且影響層面更廣，民眾的容忍度也會降低。就新北市的經驗，關鍵是要凝聚當地居民的社區共識。如果社區形成了「不要餵食流浪動物」的共識，那麼來餵食的人就會感受到集體的壓力。
+            </p>
+            <p>白西里里長陳金滄指出，白西里有兩處遊蕩犬隻聚集地，均有居民定期餵食，雖出於善意，但也導致遊蕩犬隻追逐、咬傷居民的事件發生。他說，「這些居民愛狗、有惻隱之心，但方式不當，我們也只能盡力勸導。」另一方面，陳正成則坦承，一些居民餵食遊蕩犬，主要是為避免犬隻因飢餓而翻找垃圾，造成環境髒亂，這使得管理工作更加棘手。
+            </p>
+        </div>
+    </div>
+
+    <!-- <div class="carousel-container">
+        <button class="carousel-button prev-button" id="prevButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+
+        <div class="image-container">
+            <img src="https://jiawen2000.github.io/photo/9C3A5824.jpg" alt="Slide 1" class="carousel-image"
+                id="carouselImage">
+        </div>
+
+        <button class="carousel-button next-button" id="nextButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // 確保代碼只在 DOM 完全加載後執行
+        window.addEventListener('DOMContentLoaded', function () {
+            // 圖片數組
+            const images = [
+                'https://jiawen2000.github.io/photo/9C3A5824.jpg',
+                'https://jiawen2000.github.io/photo/9C3A5345.jpg',
+                'https://jiawen2000.github.io/photo/9C3A5807.jpg',
+                'https://jiawen2000.github.io/photo/9C3A5348.jpg',
+                'https://jiawen2000.github.io/photo/9C3A5666.jpg',
+                'https://jiawen2000.github.io/photo/9C3A5593.jpg'
+            ];
+
+            let currentIndex = 0;
+
+            // 使用 ID 選擇器獲取元素
+            const imageElement = document.getElementById('carouselImage');
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+
+            // 添加除錯日誌
+            console.log('Elements:', { imageElement, prevButton, nextButton });
+
+            function updateImage() {
+                console.log('Updating image to index:', currentIndex); // 除錯日誌
+                imageElement.src = images[currentIndex];
+                imageElement.alt = `Slide ${currentIndex + 1}`;
+            }
+
+            function handlePrevClick() {
+                console.log('Previous button clicked'); // 除錯日誌
+                currentIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+                updateImage();
+            }
+
+            function handleNextClick() {
+                console.log('Next button clicked'); // 除錯日誌
+                currentIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+                updateImage();
+            }
+
+            // 確保元素存在後再添加事件監聽器
+            if (prevButton && nextButton) {
+                prevButton.addEventListener('click', handlePrevClick);
+                nextButton.addEventListener('click', handleNextClick);
+
+                // 添加額外的點擊事件測試
+                prevButton.onclick = function () {
+                    console.log('Prev button direct onclick'); // 除錯日誌
+                };
+                nextButton.onclick = function () {
+                    console.log('Next button direct onclick'); // 除錯日誌
+                };
+            } else {
+                console.error('Buttons not found!'); // 除錯日誌
+            }
+
+            // 初始化
+            updateImage();
+        });
+    </script> -->
+
+    <img src="https://jiawen2000.github.io/photo/9C3A5824.jpg" alt="圖一" class="inline-image-2">
+    <img src="https://jiawen2000.github.io/photo/9C3A5807.jpg" alt="圖一" class="inline-image-2">
+    <img src="https://jiawen2000.github.io/photo/9C3A5348.jpg" alt="圖一" class="inline-image-2">
+
+    <div class="content">
+        <div class="note">
+            <p>農地、次生林與河岸濱溪帶等淺山地區不僅有石虎出沒，也是人類活動的環境與遊蕩犬隻熱區。（林佳玟／攝影）
+            </p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <h3>犬隻干擾效應：石虎迴避行為的初步證據</h3>
+            <p>即使遊蕩犬隻對石虎生態系的影響尚未完全掌握，陳美汀指出，目前的研究已經有了一些初步的觀察與發現。台灣石虎保育協會的研究主要集中在台中市東勢區，而嘉義大學森林暨自然資源學系教授劉建男則在南投縣中寮鄉進行相關研究。兩者均藉由自動相機監測石虎的出現情況，並分析其與遊蕩犬活動之間的關聯性。
+            </p>
+            <p>研究結果顯示，在某些樣點中，若中間沒有犬隻出現，兩次拍攝到石虎的間隔時間相對穩定，通常為200至400小時。然而，一旦犬隻出沒，石虎再次現身的時間間隔會明顯拉長，甚至達到原先的3至10倍之多。這表明犬隻的存在對石虎具有顯著的干擾效應，迫使其迴避該地點。
+            </p>
+            <p>此外，陳美汀提到，一些樣點在最初架設相機時，並未記錄到犬隻的活動，且石虎的出現頻率良好。但數年後的調查發現，這些地點逐漸被遊蕩犬佔據，石虎的活動因此減少，甚至完全消失。</p>
+            <p>然而，目前仍難以精確量化貓狗的出現頻率需達到何種程度才會對石虎造成顯著影響。偶爾出現的一兩隻犬隻或許影響較小，但隨著犬隻數量增加，石虎的迴避行為變得更加明顯。陳美汀坦言，「由於數據量有限，無法進行更深入的統計分析，來確定具體的臨界值或影響頻率。」
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>專題製作：林佳玟</p>
+        <p>照片提供：台灣石虎保育協會、農業部生物多樣性研究所、台灣偵搜犬協會</p>
+        <p>上線時間：2024/12/16</p>
+        <p>最後更新時間：2025/7/2</p>
+    </div>
+    <script>
+        // Progress bar functionality
+        window.addEventListener('scroll', function () {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+    </script>
+
+</body>
+
+</html>
